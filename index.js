@@ -5,9 +5,6 @@ const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
 });
 
 client.connect();
@@ -17,7 +14,7 @@ bot.start((message) => {
 })
 bot.command('ciao', context=> {
 	  msg=context.update.message
-  context.reply(`Ciao!`)
+  context.reply(`Ciao`)
 })
 bot.command('usd', context=> {
 	  msg=context.update.message
