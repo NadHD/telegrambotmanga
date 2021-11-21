@@ -2,7 +2,7 @@ const { Telegraf } = require('telegraf')
 const bot = new Telegraf('2110225858:AAGPjnDrQ3skov42uYLZ32RzsqCol5dXk-E')
 
 const { Client } = require('pg');
-
+const EXCHANGE = 1.125
 const client = new Client({
 	user: 'sastjtgosyizfr',
     password: 'dbf2113d05da3f4e6de9d1ce13575859971714b2cb6eaa3c8da4aa8cb469d8e5',
