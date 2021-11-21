@@ -15,12 +15,9 @@ client.connect();
 bot.start((message) => {
 	return message.reply('Il bot è avviato')
 })
-
-bot.command('eur', context=> {
+bot.command('ciao', context=> {
 	  msg=context.update.message
-  importo=msg.text.split(' ')[1]
-  dollari=EXCHANGE*importo
-  context.reply(`${dollari} USD`)
+  context.reply(`Ciao!`)
 })
 bot.command('usd', context=> {
 	  msg=context.update.message
