@@ -26,6 +26,14 @@ bot.command('usd', context=> {
   euro=importo/EXCHANGE
   context.reply(`${euro} EUR`)
 })
+bot.command('createTable', context=> {
+	msg=context.update.message
+client.query('CREATE TABLE Manga', (err, res)=>{
+	console.log(err, res)
+	client.end()
+})
+context.reply(`Tabella creata`)
+})
 
 bot.launch()
 
