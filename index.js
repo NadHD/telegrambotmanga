@@ -9,12 +9,11 @@ var con = mysql.createConnection({
   database: 'listamanga'
 });
 
-
+con.connect(function(err) {
+  if (err) throw err;
+});
 
 bot.start((message) => {
-  con.connect(function(err) {
-    if (err) throw err;
-  });
 	return message.reply('Il bot è avviato e connesso')
 })
 
@@ -24,12 +23,13 @@ bot.command('ciao', context=> {
 })
 
 bot.command('collezione', context=> {
-  con.connect(function(err) {
+  con.query("SELECT * FROM collezione", function (err, results, fields) {
     if (err) throw err;
-    con.query("SELECT * FROM collezione", function (err, result, fields) {
-      if (err) throw err;
-      context.reply(result);
-    });
+    let str = '';
+    for (const result of results){
+      str = str + result.Nome + ', Mancanti: ' + result.Mancanti + ', Totali: ' + result.Totali + '\n';
+    }
+    context.reply(str);
   });
 })
 
