@@ -1,38 +1,36 @@
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf('2110225858:AAGPjnDrQ3skov42uYLZ32RzsqCol5dXk-E')
+var mysql = require('mysql');
 
-const { Client } = require('pg');
-const EXCHANGE = 1.125
-const client = new Client({
-	user: 'sastjtgosyizfr',
-    password: 'dbf2113d05da3f4e6de9d1ce13575859971714b2cb6eaa3c8da4aa8cb469d8e5',
-    database: 'deksproc2dlgv', 
-    host: 'ec2-54-155-200-16.eu-west-1.compute.amazonaws.com',
-    port: 5432
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: 'listamanga'
 });
 
-client.connect();
+
 
 bot.start((message) => {
-	return message.reply('Il bot è avviato')
+  con.connect(function(err) {
+    if (err) throw err;
+  });
+	return message.reply('Il bot è avviato e connesso')
 })
+
 bot.command('ciao', context=> {
-	  msg=context.update.message
+	msg=context.update.message
   context.reply(`Ciao`)
 })
-bot.command('usd', context=> {
-	  msg=context.update.message
-  importo=msg.text.split(' ')[1]
-  euro=importo/EXCHANGE
-  context.reply(`${euro} EUR`)
-})
-bot.command('createTable', context=> {
-	msg=context.update.message
-client.query('CREATE TABLE Manga', (err, res)=>{
-	console.log(err, res)
-	client.end()
-})
-context.reply(`Tabella creata`)
+
+bot.command('collezione', context=> {
+  con.connect(function(err) {
+    if (err) throw err;
+    con.query("SELECT * FROM collezione", function (err, result, fields) {
+      if (err) throw err;
+      context.reply(result);
+    });
+  });
 })
 
 bot.launch()
