@@ -15,6 +15,7 @@
     "mysql": "^2.18.1",
     "node-telegram-bot-api": "^0.18.0",
     "pg": "^8.7.1",
-    "telegraf": "^4.4.2"
+    "telegraf": "^4.4.2",
+    "telegram-keyboard": "^2.2.8"
   }
 }
